@@ -1,0 +1,47 @@
+package com.ozalp.portfolio.business.managers;
+
+import com.ozalp.portfolio.business.dtos.requests.CreateEntranceRequest;
+import com.ozalp.portfolio.business.dtos.responses.EntranceResponse;
+import com.ozalp.portfolio.business.exeptions.errors.DataAlreadyExist;
+import com.ozalp.portfolio.business.mappers.EntranceMapper;
+import com.ozalp.portfolio.business.services.EntranceService;
+import com.ozalp.portfolio.dataAccess.EntranceRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class EntranceManager implements EntranceService {
+
+    private final EntranceRepository repository;
+    private final EntranceMapper mapper;
+
+    @Override
+    public void add(CreateEntranceRequest createEntranceRequest) {
+        if (!repository.findAllByDeletedAtIsNullAndShowableIsTrue().isEmpty()) {
+            throw new DataAlreadyExist();
+        }
+        repository.save(mapper.toEntity(createEntranceRequest));
+    }
+
+    @Override
+    public void delete(int id) {
+
+    }
+
+    @Override
+    public void setShowable(Boolean value) {
+
+    }
+
+    @Override
+    public List<EntranceResponse> getEntrance() {
+        return repository.findAllByDeletedAtIsNullAndShowableIsTrue(PageRequest.of(0, 1))
+                .stream()
+                .map(mapper::toResponse)
+                .toList();
+    }
+}
