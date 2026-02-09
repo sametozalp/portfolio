@@ -17,7 +17,7 @@ public class Social extends BaseEntity {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private SocialMedia socialMedia;
+    private SocialMedia type;
 
     @Column
     private String url;

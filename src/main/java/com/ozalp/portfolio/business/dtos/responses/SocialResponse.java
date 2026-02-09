@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class SocialResponse {
 
-    private SocialMedia socialMedia;
+    private SocialMedia type;
 
     private String url;
 }
