@@ -23,6 +23,9 @@ public class ProjectCategoryManager implements ProjectCategoryService {
 
     @Override
     public void delete(int id) {
+        var entity = findById(id);
+        entity.markAsDeleted();
+        repository.save(entity);
 
     }
 

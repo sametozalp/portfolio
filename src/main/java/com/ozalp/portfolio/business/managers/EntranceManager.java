@@ -30,6 +30,9 @@ public class EntranceManager implements EntranceService {
 
     @Override
     public void delete(int id) {
+        var entity = findById(id);
+        entity.markAsDeleted();
+        repository.save(entity);
 
     }
 
