@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Experience extends BaseSchoolEducation {
+public class Experience extends Resume {
 
     @Column
     private String company;

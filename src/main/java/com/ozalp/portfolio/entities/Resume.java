@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class BaseSchoolEducation extends BaseEntity {
+public class Resume extends BaseEntity {
 
     @Column
     private String title;
