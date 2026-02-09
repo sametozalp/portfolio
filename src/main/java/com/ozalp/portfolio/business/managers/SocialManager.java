@@ -1,6 +1,7 @@
 package com.ozalp.portfolio.business.managers;
 
-import com.ozalp.portfolio.business.dtos.requests.CreateSocialRequest;
+import com.ozalp.portfolio.business.dtos.requests.create.CreateSocialRequest;
+import com.ozalp.portfolio.business.dtos.requests.update.UpdateSocialRequest;
 import com.ozalp.portfolio.business.dtos.responses.SocialResponse;
 import com.ozalp.portfolio.business.mappers.SocialMapper;
 import com.ozalp.portfolio.business.services.SocialService;
@@ -48,5 +49,12 @@ public class SocialManager implements SocialService {
                 .stream()
                 .map(mapper::toResponse)
                 .toList();
+    }
+
+    @Override
+    public void update(int id, UpdateSocialRequest request) {
+        var entity = findById(id);
+        mapper.updateEntity(request, entity);
+        repository.save(entity);
     }
 }

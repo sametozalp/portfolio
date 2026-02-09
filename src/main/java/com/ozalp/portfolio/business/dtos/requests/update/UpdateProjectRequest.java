@@ -1,4 +1,4 @@
-package com.ozalp.portfolio.business.dtos.requests;
+package com.ozalp.portfolio.business.dtos.requests.update;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 @Getter
 @Setter
-public class CreateProjectRequest {
+public class UpdateProjectRequest {
 
     private String title;
 

@@ -1,12 +1,14 @@
 package com.ozalp.portfolio.business.services;
 
-import com.ozalp.portfolio.business.dtos.requests.CreateEntranceRequest;
+import com.ozalp.portfolio.business.dtos.requests.create.CreateEntranceRequest;
+import com.ozalp.portfolio.business.dtos.requests.update.UpdateEntranceRequest;
 import com.ozalp.portfolio.business.dtos.responses.EntranceResponse;
 import com.ozalp.portfolio.entities.Entrance;
 
-import java.util.List;
-
 public interface EntranceService extends BaseService<CreateEntranceRequest, Entrance> {
 
-    List<EntranceResponse> getEntrance();
+    EntranceResponse getEntrance();
+
+    void update(int id, UpdateEntranceRequest request);
+
 }

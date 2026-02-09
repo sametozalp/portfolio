@@ -1,6 +1,7 @@
 package com.ozalp.portfolio.business.managers;
 
-import com.ozalp.portfolio.business.dtos.requests.CreateEducationRequest;
+import com.ozalp.portfolio.business.dtos.requests.create.CreateEducationRequest;
+import com.ozalp.portfolio.business.dtos.requests.update.UpdateEducationRequest;
 import com.ozalp.portfolio.business.dtos.responses.EducationResponse;
 import com.ozalp.portfolio.business.mappers.EducationMapper;
 import com.ozalp.portfolio.business.services.EducationService;
@@ -48,5 +49,12 @@ public class EducationManager implements EducationService {
                 .stream()
                 .map(mapper::toResponse)
                 .toList();
+    }
+
+    @Override
+    public void update(int id, UpdateEducationRequest request) {
+        var entity = findById(id);
+        mapper.updateEntity(request, entity);
+        repository.save(entity);
     }
 }

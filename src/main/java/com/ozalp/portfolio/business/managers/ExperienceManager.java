@@ -1,6 +1,7 @@
 package com.ozalp.portfolio.business.managers;
 
-import com.ozalp.portfolio.business.dtos.requests.CreateExperienceRequest;
+import com.ozalp.portfolio.business.dtos.requests.create.CreateExperienceRequest;
+import com.ozalp.portfolio.business.dtos.requests.update.UpdateExperienceRequest;
 import com.ozalp.portfolio.business.dtos.responses.ExperienceResponse;
 import com.ozalp.portfolio.business.mappers.ExperienceMapper;
 import com.ozalp.portfolio.business.services.ExperienceService;
@@ -48,5 +49,12 @@ public class ExperienceManager implements ExperienceService {
                 .stream()
                 .map(mapper::toResponse)
                 .toList();
+    }
+
+    @Override
+    public void update(int id, UpdateExperienceRequest request) {
+        var entity = findById(id);
+        mapper.updateEntity(request, entity);
+        repository.save(entity);
     }
 }

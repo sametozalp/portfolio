@@ -1,4 +1,4 @@
-package com.ozalp.portfolio.business.dtos.requests;
+package com.ozalp.portfolio.business.dtos.requests.create;
 
 import com.ozalp.portfolio.business.enums.SocialMedia;
 import lombok.Getter;

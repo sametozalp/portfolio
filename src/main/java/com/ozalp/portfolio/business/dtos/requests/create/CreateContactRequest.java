@@ -1,14 +1,16 @@
-package com.ozalp.portfolio.business.dtos.requests;
+package com.ozalp.portfolio.business.dtos.requests.create;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateEntranceRequest {
+public class CreateContactRequest {
 
     private String title;
 
     private String description;
+
+    private String myEmail;
 
 }

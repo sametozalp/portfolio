@@ -1,6 +1,6 @@
 package com.ozalp.portfolio.business.managers;
 
-import com.ozalp.portfolio.business.dtos.requests.CreateProjectCategoryRequest;
+import com.ozalp.portfolio.business.dtos.requests.create.CreateProjectCategoryRequest;
 import com.ozalp.portfolio.business.mappers.ProjectCategoryMapper;
 import com.ozalp.portfolio.business.services.ProjectCategoryService;
 import com.ozalp.portfolio.dataAccess.ProjectCategoryRepository;

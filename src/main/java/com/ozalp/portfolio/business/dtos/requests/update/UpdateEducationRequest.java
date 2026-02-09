@@ -1,4 +1,4 @@
-package com.ozalp.portfolio.business.dtos.requests;
+package com.ozalp.portfolio.business.dtos.requests.update;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,7 +6,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 @Getter
 @Setter
-public class CreateEducationRequest {
+public class UpdateEducationRequest {
 
     private String title;
 

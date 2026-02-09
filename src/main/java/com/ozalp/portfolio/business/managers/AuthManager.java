@@ -1,6 +1,6 @@
 package com.ozalp.portfolio.business.managers;
 
-import com.ozalp.portfolio.business.dtos.requests.CreateAuthRequest;
+import com.ozalp.portfolio.business.dtos.requests.create.CreateAuthRequest;
 import com.ozalp.portfolio.business.mappers.AuthMapper;
 import com.ozalp.portfolio.business.services.AuthService;
 import com.ozalp.portfolio.dataAccess.AuthRepository;

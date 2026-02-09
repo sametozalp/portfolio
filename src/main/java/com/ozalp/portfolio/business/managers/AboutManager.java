@@ -1,13 +1,13 @@
 package com.ozalp.portfolio.business.managers;
 
-import com.ozalp.portfolio.business.dtos.requests.CreateAboutRequest;
+import com.ozalp.portfolio.business.dtos.requests.create.CreateAboutRequest;
+import com.ozalp.portfolio.business.dtos.requests.update.UpdateAboutRequest;
 import com.ozalp.portfolio.business.dtos.responses.AboutResponse;
 import com.ozalp.portfolio.business.exeptions.errors.DataAlreadyExist;
 import com.ozalp.portfolio.business.mappers.AboutMapper;
 import com.ozalp.portfolio.business.services.AboutService;
 import com.ozalp.portfolio.dataAccess.AboutRepository;
 import com.ozalp.portfolio.entities.About;
-import com.ozalp.portfolio.entities.BaseEntity;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -55,4 +55,12 @@ public class AboutManager implements AboutService {
                 .toList()
                 .getFirst();
     }
+
+    @Override
+    public void update(int id, UpdateAboutRequest request) {
+        var entity = findById(id);
+        mapper.updateEntity(request, entity);
+        repository.save(entity);
+    }
+
 }

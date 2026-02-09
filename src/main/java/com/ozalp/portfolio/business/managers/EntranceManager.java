@@ -1,6 +1,7 @@
 package com.ozalp.portfolio.business.managers;
 
-import com.ozalp.portfolio.business.dtos.requests.CreateEntranceRequest;
+import com.ozalp.portfolio.business.dtos.requests.create.CreateEntranceRequest;
+import com.ozalp.portfolio.business.dtos.requests.update.UpdateEntranceRequest;
 import com.ozalp.portfolio.business.dtos.responses.EntranceResponse;
 import com.ozalp.portfolio.business.exeptions.errors.DataAlreadyExist;
 import com.ozalp.portfolio.business.mappers.EntranceMapper;
@@ -11,8 +12,6 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -48,10 +47,18 @@ public class EntranceManager implements EntranceService {
     }
 
     @Override
-    public List<EntranceResponse> getEntrance() {
+    public EntranceResponse getEntrance() {
         return repository.findAllByDeletedAtIsNullAndShowableIsTrue(PageRequest.of(0, 1))
                 .stream()
                 .map(mapper::toResponse)
-                .toList();
+                .toList()
+                .getFirst();
+    }
+
+    @Override
+    public void update(int id, UpdateEntranceRequest request) {
+        var entity = findById(id);
+        mapper.updateEntity(request, entity);
+        repository.save(entity);
     }
 }

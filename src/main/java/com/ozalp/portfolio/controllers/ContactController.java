@@ -1,15 +1,13 @@
 package com.ozalp.portfolio.controllers;
 
-import com.ozalp.portfolio.business.dtos.requests.CreateContactRequest;
+import com.ozalp.portfolio.business.dtos.requests.create.CreateContactRequest;
+import com.ozalp.portfolio.business.dtos.requests.update.UpdateContactRequest;
 import com.ozalp.portfolio.business.services.ContactService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/contact")
@@ -22,5 +20,11 @@ public class ContactController {
     ResponseEntity<?> add(@RequestBody @Valid CreateContactRequest request) {
         contactService.add(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PutMapping("/update/{id}")
+    ResponseEntity<?> update(@PathVariable int id, @RequestBody @Valid UpdateContactRequest request) {
+        contactService.update(id, request);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

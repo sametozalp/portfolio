@@ -1,6 +1,7 @@
 package com.ozalp.portfolio.business.managers;
 
-import com.ozalp.portfolio.business.dtos.requests.CreateContactRequest;
+import com.ozalp.portfolio.business.dtos.requests.create.CreateContactRequest;
+import com.ozalp.portfolio.business.dtos.requests.update.UpdateContactRequest;
 import com.ozalp.portfolio.business.dtos.responses.ContactResponse;
 import com.ozalp.portfolio.business.exeptions.errors.DataAlreadyExist;
 import com.ozalp.portfolio.business.mappers.ContactMapper;
@@ -52,4 +53,11 @@ public class ContactManager implements ContactService {
                 .map(mapper::toResponse)
                 .toList()
                 .getFirst();    }
+
+    @Override
+    public void update(int id, UpdateContactRequest request) {
+        var entity = findById(id);
+        mapper.updateEntity(request, entity);
+        repository.save(entity);
+    }
 }

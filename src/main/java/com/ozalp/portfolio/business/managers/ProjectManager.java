@@ -1,6 +1,7 @@
 package com.ozalp.portfolio.business.managers;
 
-import com.ozalp.portfolio.business.dtos.requests.CreateProjectRequest;
+import com.ozalp.portfolio.business.dtos.requests.create.CreateProjectRequest;
+import com.ozalp.portfolio.business.dtos.requests.update.UpdateProjectRequest;
 import com.ozalp.portfolio.business.dtos.responses.ProjectResponse;
 import com.ozalp.portfolio.business.mappers.ProjectMapper;
 import com.ozalp.portfolio.business.services.ProjectService;
@@ -49,5 +50,12 @@ public class ProjectManager implements ProjectService {
                 .stream()
                 .map(mapper::toResponse)
                 .toList();
+    }
+
+    @Override
+    public void update(int id, UpdateProjectRequest request) {
+        var entity = findById(id);
+        mapper.updateEntity(request, entity);
+        repository.save(entity);
     }
 }

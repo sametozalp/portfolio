@@ -1,15 +1,13 @@
 package com.ozalp.portfolio.controllers;
 
-import com.ozalp.portfolio.business.dtos.requests.CreateProjectRequest;
+import com.ozalp.portfolio.business.dtos.requests.create.CreateProjectRequest;
+import com.ozalp.portfolio.business.dtos.requests.update.UpdateProjectRequest;
 import com.ozalp.portfolio.business.services.ProjectService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/project")
@@ -22,5 +20,11 @@ public class ProjectController {
     ResponseEntity<?> add(@RequestBody @Valid CreateProjectRequest request) {
         projectService.add(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PutMapping("/update/{id}")
+    ResponseEntity<?> update(@PathVariable int id, @RequestBody @Valid UpdateProjectRequest request) {
+        projectService.update(id, request);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

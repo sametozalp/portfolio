@@ -1,6 +1,6 @@
 package com.ozalp.portfolio.controllers;
 
-import com.ozalp.portfolio.business.dtos.requests.CreateProjectCategoryRequest;
+import com.ozalp.portfolio.business.dtos.requests.create.CreateProjectCategoryRequest;
 import com.ozalp.portfolio.business.services.ProjectCategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

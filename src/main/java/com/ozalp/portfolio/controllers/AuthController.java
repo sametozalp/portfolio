@@ -1,6 +1,6 @@
 package com.ozalp.portfolio.controllers;
 
-import com.ozalp.portfolio.business.dtos.requests.CreateAuthRequest;
+import com.ozalp.portfolio.business.dtos.requests.create.CreateAuthRequest;
 import com.ozalp.portfolio.business.services.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

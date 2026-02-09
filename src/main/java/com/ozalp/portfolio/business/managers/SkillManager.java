@@ -1,6 +1,7 @@
 package com.ozalp.portfolio.business.managers;
 
-import com.ozalp.portfolio.business.dtos.requests.CreateSkillRequest;
+import com.ozalp.portfolio.business.dtos.requests.create.CreateSkillRequest;
+import com.ozalp.portfolio.business.dtos.requests.update.UpdateSkillRequest;
 import com.ozalp.portfolio.business.dtos.responses.SkillResponse;
 import com.ozalp.portfolio.business.mappers.SkillMapper;
 import com.ozalp.portfolio.business.services.SkillService;
@@ -48,5 +49,12 @@ public class SkillManager implements SkillService {
                 .stream()
                 .map(mapper::toResponse)
                 .toList();
+    }
+
+    @Override
+    public void update(int id, UpdateSkillRequest request) {
+        var entity = findById(id);
+        mapper.updateEntity(request, entity);
+        repository.save(entity);
     }
 }

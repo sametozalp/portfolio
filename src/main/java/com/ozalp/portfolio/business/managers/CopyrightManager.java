@@ -1,6 +1,7 @@
 package com.ozalp.portfolio.business.managers;
 
-import com.ozalp.portfolio.business.dtos.requests.CreateCopyrightRequest;
+import com.ozalp.portfolio.business.dtos.requests.create.CreateCopyrightRequest;
+import com.ozalp.portfolio.business.dtos.requests.update.UpdateCopyrightRequest;
 import com.ozalp.portfolio.business.dtos.responses.CopyrightResponse;
 import com.ozalp.portfolio.business.exeptions.errors.DataAlreadyExist;
 import com.ozalp.portfolio.business.mappers.CopyrightMapper;
@@ -52,5 +53,12 @@ public class CopyrightManager implements CopyrightService {
                 .map(mapper::toResponse)
                 .toList()
                 .getFirst();
+    }
+
+    @Override
+    public void update(int id, UpdateCopyrightRequest request) {
+        var entity = findById(id);
+        mapper.updateEntity(request, entity);
+        repository.save(entity);
     }
 }
