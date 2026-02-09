@@ -12,7 +12,7 @@ public class CreateEducationRequest {
 
     private String description;
 
-    private String company;
+    private String school;
 
     private LocalDate startDate;
 
