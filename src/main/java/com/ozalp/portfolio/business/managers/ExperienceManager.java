@@ -5,6 +5,8 @@ import com.ozalp.portfolio.business.dtos.responses.ExperienceResponse;
 import com.ozalp.portfolio.business.mappers.ExperienceMapper;
 import com.ozalp.portfolio.business.services.ExperienceService;
 import com.ozalp.portfolio.dataAccess.ExperienceRepository;
+import com.ozalp.portfolio.entities.Experience;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +30,16 @@ public class ExperienceManager implements ExperienceService {
     }
 
     @Override
-    public void setShowable(Boolean value) {
+    public void setShowable(int id, Boolean value) {
+        Experience experience = findById(id);
+        experience.setShowable(value);
+        repository.save(experience);
+    }
 
+    @Override
+    public Experience findById(int id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Not found"));
     }
 
     @Override

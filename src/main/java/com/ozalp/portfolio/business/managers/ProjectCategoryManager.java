@@ -4,6 +4,8 @@ import com.ozalp.portfolio.business.dtos.requests.CreateProjectCategoryRequest;
 import com.ozalp.portfolio.business.mappers.ProjectCategoryMapper;
 import com.ozalp.portfolio.business.services.ProjectCategoryService;
 import com.ozalp.portfolio.dataAccess.ProjectCategoryRepository;
+import com.ozalp.portfolio.entities.ProjectCategory;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +27,15 @@ public class ProjectCategoryManager implements ProjectCategoryService {
     }
 
     @Override
-    public void setShowable(Boolean value) {
+    public void setShowable(int id, Boolean value) {
+        ProjectCategory projectCategory = findById(id);
+        projectCategory.setShowable(value);
+        repository.save(projectCategory);
+    }
 
+    @Override
+    public ProjectCategory findById(int id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Not found"));
     }
 }

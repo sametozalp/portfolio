@@ -5,6 +5,8 @@ import com.ozalp.portfolio.business.dtos.responses.ProjectResponse;
 import com.ozalp.portfolio.business.mappers.ProjectMapper;
 import com.ozalp.portfolio.business.services.ProjectService;
 import com.ozalp.portfolio.dataAccess.ProjectRepository;
+import com.ozalp.portfolio.entities.Project;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -29,8 +31,16 @@ public class ProjectManager implements ProjectService {
     }
 
     @Override
-    public void setShowable(Boolean value) {
+    public void setShowable(int id, Boolean value) {
+        Project project = findById(id);
+        project.setShowable(value);
+        repository.save(project);
+    }
 
+    @Override
+    public Project findById(int id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Not found"));
     }
 
     @Override

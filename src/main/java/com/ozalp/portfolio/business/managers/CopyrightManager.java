@@ -6,6 +6,8 @@ import com.ozalp.portfolio.business.exeptions.errors.DataAlreadyExist;
 import com.ozalp.portfolio.business.mappers.CopyrightMapper;
 import com.ozalp.portfolio.business.services.CopyrightService;
 import com.ozalp.portfolio.dataAccess.CopyrightRepository;
+import com.ozalp.portfolio.entities.Copyright;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -31,8 +33,16 @@ public class CopyrightManager implements CopyrightService {
     }
 
     @Override
-    public void setShowable(Boolean value) {
+    public void setShowable(int id, Boolean value) {
+        Copyright copyright = findById(id);
+        copyright.setShowable(value);
+        repository.save(copyright);
+    }
 
+    @Override
+    public Copyright findById(int id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Not found"));
     }
 
     @Override

@@ -6,6 +6,8 @@ import com.ozalp.portfolio.business.exeptions.errors.DataAlreadyExist;
 import com.ozalp.portfolio.business.mappers.EntranceMapper;
 import com.ozalp.portfolio.business.services.EntranceService;
 import com.ozalp.portfolio.dataAccess.EntranceRepository;
+import com.ozalp.portfolio.entities.Entrance;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -33,8 +35,16 @@ public class EntranceManager implements EntranceService {
     }
 
     @Override
-    public void setShowable(Boolean value) {
+    public void setShowable(int id, Boolean value) {
+        Entrance entrance = findById(id);
+        entrance.setShowable(value);
+        repository.save(entrance);
+    }
 
+    @Override
+    public Entrance findById(int id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Not found"));
     }
 
     @Override

@@ -5,6 +5,8 @@ import com.ozalp.portfolio.business.dtos.responses.EducationResponse;
 import com.ozalp.portfolio.business.mappers.EducationMapper;
 import com.ozalp.portfolio.business.services.EducationService;
 import com.ozalp.portfolio.dataAccess.EducationRepository;
+import com.ozalp.portfolio.entities.Education;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +30,16 @@ public class EducationManager implements EducationService {
     }
 
     @Override
-    public void setShowable(Boolean value) {
+    public void setShowable(int id, Boolean value) {
+        Education education = findById(id);
+        education.setShowable(value);
+        repository.save(education);
+    }
 
+    @Override
+    public Education findById(int id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Not found"));
     }
 
     @Override

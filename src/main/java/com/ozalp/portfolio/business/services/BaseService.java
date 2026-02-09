@@ -1,10 +1,14 @@
 package com.ozalp.portfolio.business.services;
 
-public interface BaseService<Req> {
+import com.ozalp.portfolio.entities.BaseEntity;
+
+public interface BaseService<Req, T extends BaseEntity> {
 
     void add(Req req);
 
     void delete(int id);
 
-    void setShowable(Boolean value);
+    void setShowable(int id, Boolean value);
+
+    T findById(int id);
 }

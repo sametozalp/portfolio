@@ -6,6 +6,8 @@ import com.ozalp.portfolio.business.exeptions.errors.DataAlreadyExist;
 import com.ozalp.portfolio.business.mappers.ContactMapper;
 import com.ozalp.portfolio.business.services.ContactService;
 import com.ozalp.portfolio.dataAccess.ContactRepository;
+import com.ozalp.portfolio.entities.Contact;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -31,8 +33,16 @@ public class ContactManager implements ContactService {
     }
 
     @Override
-    public void setShowable(Boolean value) {
+    public void setShowable(int id, Boolean value) {
+        Contact contact = findById(id);
+        contact.setShowable(value);
+        repository.save(contact);
+    }
 
+    @Override
+    public Contact findById(int id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Not found"));
     }
 
     @Override

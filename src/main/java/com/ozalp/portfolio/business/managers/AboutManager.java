@@ -6,6 +6,9 @@ import com.ozalp.portfolio.business.exeptions.errors.DataAlreadyExist;
 import com.ozalp.portfolio.business.mappers.AboutMapper;
 import com.ozalp.portfolio.business.services.AboutService;
 import com.ozalp.portfolio.dataAccess.AboutRepository;
+import com.ozalp.portfolio.entities.About;
+import com.ozalp.portfolio.entities.BaseEntity;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -32,8 +35,16 @@ public class AboutManager implements AboutService {
     }
 
     @Override
-    public void setShowable(Boolean value) {
+    public void setShowable(int id, Boolean value) {
+        About about = findById(id);
+        about.setShowable(value);
+        repository.save(about);
+    }
 
+    @Override
+    public About findById(int id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Not found"));
     }
 
     @Override

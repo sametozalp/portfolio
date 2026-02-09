@@ -5,6 +5,8 @@ import com.ozalp.portfolio.business.dtos.responses.SkillResponse;
 import com.ozalp.portfolio.business.mappers.SkillMapper;
 import com.ozalp.portfolio.business.services.SkillService;
 import com.ozalp.portfolio.dataAccess.SkillRepository;
+import com.ozalp.portfolio.entities.Skill;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +30,16 @@ public class SkillManager implements SkillService {
     }
 
     @Override
-    public void setShowable(Boolean value) {
+    public void setShowable(int id, Boolean value) {
+        Skill skill = findById(id);
+        skill.setShowable(value);
+        repository.save(skill);
+    }
 
+    @Override
+    public Skill findById(int id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Not found"));
     }
 
     @Override

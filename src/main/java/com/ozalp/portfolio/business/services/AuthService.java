@@ -1,6 +1,7 @@
 package com.ozalp.portfolio.business.services;
 
 import com.ozalp.portfolio.business.dtos.requests.CreateAuthRequest;
+import com.ozalp.portfolio.entities.Auth;
 
-public interface AuthService extends BaseService<CreateAuthRequest> {
+public interface AuthService extends BaseService<CreateAuthRequest, Auth> {
 }

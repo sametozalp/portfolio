@@ -4,6 +4,8 @@ import com.ozalp.portfolio.business.dtos.requests.CreateAuthRequest;
 import com.ozalp.portfolio.business.mappers.AuthMapper;
 import com.ozalp.portfolio.business.services.AuthService;
 import com.ozalp.portfolio.dataAccess.AuthRepository;
+import com.ozalp.portfolio.entities.Auth;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,16 @@ public class AuthManager implements AuthService {
     }
 
     @Override
-    public void setShowable(Boolean value) {
-
+    public void setShowable(int id, Boolean value) {
+        Auth auth = findById(id);
+        auth.setShowable(value);
+        repository.save(auth);
     }
+
+    @Override
+    public Auth findById(int id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Not found"));
+    }
+
 }
