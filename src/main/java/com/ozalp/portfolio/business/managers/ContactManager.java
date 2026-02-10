@@ -1,5 +1,6 @@
 package com.ozalp.portfolio.business.managers;
 
+import com.ozalp.portfolio.business.dtos.requests.MailContactRequest;
 import com.ozalp.portfolio.business.dtos.requests.create.CreateContactRequest;
 import com.ozalp.portfolio.business.dtos.requests.update.UpdateContactRequest;
 import com.ozalp.portfolio.business.dtos.responses.ContactResponse;
@@ -11,6 +12,8 @@ import com.ozalp.portfolio.entities.Contact;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +22,7 @@ public class ContactManager implements ContactService {
 
     private final ContactRepository repository;
     private final ContactMapper mapper;
+    private final JavaMailSender mailSender;
 
     @Override
     public void add(CreateContactRequest createContactRequest) {
@@ -62,5 +66,15 @@ public class ContactManager implements ContactService {
         var entity = findById(id);
         mapper.updateEntity(request, entity);
         repository.save(entity);
+    }
+
+    @Override
+    public void send(MailContactRequest request) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("mail-adresiniz@gmail.com");
+        message.setTo("sametozalp0056@gmail.com");
+        message.setSubject(request.getName() + request.getEmail());
+        message.setText(request.getMessage());
+        mailSender.send(message);
     }
 }

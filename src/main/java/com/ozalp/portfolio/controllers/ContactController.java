@@ -25,6 +25,7 @@ public class ContactController {
 
     @PostMapping("/send")
     ResponseEntity<?> send(@RequestBody @Valid MailContactRequest request) {
+        contactService.send(request);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
