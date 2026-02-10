@@ -1,5 +1,6 @@
 package com.ozalp.portfolio.controllers;
 
+import com.ozalp.portfolio.business.dtos.requests.MailContactRequest;
 import com.ozalp.portfolio.business.dtos.requests.create.CreateContactRequest;
 import com.ozalp.portfolio.business.dtos.requests.update.UpdateContactRequest;
 import com.ozalp.portfolio.business.services.ContactService;
@@ -20,6 +21,11 @@ public class ContactController {
     ResponseEntity<?> add(@RequestBody @Valid CreateContactRequest request) {
         contactService.add(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/send")
+    ResponseEntity<?> send(@RequestBody @Valid MailContactRequest request) {
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PutMapping("/update/{id}")
