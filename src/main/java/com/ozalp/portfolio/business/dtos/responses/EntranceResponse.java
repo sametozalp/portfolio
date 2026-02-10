@@ -11,4 +11,6 @@ public class EntranceResponse {
 
     private String description;
 
+    private String fullName;
+
 }

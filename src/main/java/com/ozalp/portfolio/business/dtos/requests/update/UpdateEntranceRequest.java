@@ -11,4 +11,6 @@ public class UpdateEntranceRequest {
 
     private String description;
 
+    private String fullName;
+
 }

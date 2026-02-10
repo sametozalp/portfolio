@@ -16,9 +16,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class About extends BaseEntity {
 
-    @Column
-    private String title;
-
     @Column(columnDefinition = "TEXT")
     private String description;
 

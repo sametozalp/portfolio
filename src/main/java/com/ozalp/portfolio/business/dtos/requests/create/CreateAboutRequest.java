@@ -7,8 +7,6 @@ import lombok.Setter;
 @Setter
 public class CreateAboutRequest {
 
-    private String title;
-
     private String description;
 
     private String profileImageUrl;

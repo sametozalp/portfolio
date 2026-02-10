@@ -7,10 +7,10 @@ import lombok.Setter;
 @Setter
 public class AboutResponse {
 
-    private String title;
-
     private String description;
 
     private String profileImageUrl;
+
+    private String fullName;
 
 }

@@ -22,4 +22,6 @@ public class Entrance extends BaseEntity {
     @Column
     private String description;
 
+    @Column
+    private String fullName;
 }

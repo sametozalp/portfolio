@@ -11,4 +11,6 @@ public class CreateEntranceRequest {
 
     private String description;
 
+    private String fullName;
+
 }
